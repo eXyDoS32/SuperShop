@@ -41,7 +41,7 @@ namespace SuperShop.Controllers
         }
 
         // GET: Products/Create
-        public IActionResult Create()
+        public IActionResult Create()  //chama a image principal para a view
         {
             return View();
         }
@@ -51,7 +51,7 @@ namespace SuperShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,ImageURL,LastPurchase,LastSale,IsAvailable,Stock")] Product product)
+        public async Task<IActionResult> Create(Product product)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace SuperShop.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.FindAsync(id); //
             if (product == null)
             {
                 return NotFound();
@@ -83,7 +83,7 @@ namespace SuperShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,ImageURL,LastPurchase,LastSale,IsAvailable,Stock")] Product product)
+        public async Task<IActionResult> Edit(int id,Product product)
         {
             if (id != product.Id)
             {
@@ -132,7 +132,7 @@ namespace SuperShop.Controllers
         }
 
         // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")] //reencaminhar
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
