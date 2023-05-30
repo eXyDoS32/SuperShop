@@ -30,7 +30,7 @@ namespace SuperShop
             // services.AddScoped  qualquer objeto ou servico e sobreposto apaga e sobrepoe com o novo
 
             services.AddTransient<SeedDb>();
-            services.AddScoped<IRepository, Repository>(); //dependenci injection
+            services.AddScoped<IProductRepository, ProductRepository>(); //dependenci injection
             services.AddControllersWithViews();
         }
 

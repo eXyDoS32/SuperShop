@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SuperShop.Data.Entities
 {
-    public class Product
+    public class Product : IEntity
     {
         //[Key] server para caso queria mudar o nome do Id 
         public int Id { get; set; }
