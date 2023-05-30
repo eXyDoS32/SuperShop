@@ -25,9 +25,12 @@ namespace SuperShop
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddTransient<SeedDb>(); // cria e destroi ou seja so usa uma vez
-           // services.AddSingleton  cria e nao destroi usa varias vezes pouco usado
-           // services.AddScoped  qualquer objeto ou servico e sobreposto apaga e sobrepoe com o novo
+            // services.AddTransient cria e destroi ou seja so usa uma vez
+            // services.AddSingleton  cria e nao destroi usa varias vezes pouco usado
+            // services.AddScoped  qualquer objeto ou servico e sobreposto apaga e sobrepoe com o novo
+
+            services.AddTransient<SeedDb>();
+            services.AddScoped<IRepository, Repository>(); //dependenci injection
             services.AddControllersWithViews();
         }
 
