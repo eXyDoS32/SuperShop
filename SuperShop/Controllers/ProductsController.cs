@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using SuperShop.Data;
 using SuperShop.Data.Entities;
+using SuperShop.Helpers;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SuperShop.Controllers
@@ -9,16 +11,19 @@ namespace SuperShop.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductRepository _productrepository;
+        private readonly IUserHelper _userHelper;
 
-        public ProductsController(IProductRepository productrepository)
+        public ProductsController(IProductRepository productrepository,
+            IUserHelper userHelper)
         {
             _productrepository = productrepository;
+            _userHelper = userHelper;
         }
 
         // GET: Products
         public IActionResult Index()
         {
-            return View(_productrepository.GetAll());
+            return View(_productrepository.GetAll().OrderBy(n => n.Name));
         }
 
         // GET: Products/Details/5
@@ -52,6 +57,8 @@ namespace SuperShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                //TODO: Change for user that is logged in
+                product.User = await _userHelper.GetUserByEmailAsyn("diogot@gmail.com");
                 await _productrepository.CreateAsync(product);
                 return RedirectToAction(nameof(Index));
             }
@@ -88,6 +95,8 @@ namespace SuperShop.Controllers
             {
                 try
                 {
+                    //TODO: Change for user that is logged in
+                    product.User = await _userHelper.GetUserByEmailAsyn("diogot@gmail.com");
                     await _productrepository.UpdateAsync(product);
                 }
                 catch (DbUpdateConcurrencyException)
