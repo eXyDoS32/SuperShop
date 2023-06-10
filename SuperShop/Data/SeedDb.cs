@@ -11,7 +11,6 @@ namespace SuperShop.Data
     {
         private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
-        private readonly UserManager<User> _userManager;
         private Random _random;
 
         public SeedDb(DataContext context,IUserHelper userHelper)
