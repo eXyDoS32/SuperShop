@@ -45,10 +45,15 @@ namespace SuperShop
             // services.AddScoped  qualquer objeto ou servico e sobreposto apaga e sobrepoe com o novo
 
             services.AddTransient<SeedDb>();
-            services.AddScoped<IProductRepository, ProductRepository>(); //dependenci injection
-            services.AddScoped<IUserHelper, UserHelper>();
 
-            services.AddControllersWithViews();
+			services.AddScoped<IUserHelper, UserHelper>();
+			services.AddScoped<IImageHelper, ImageHelper>();
+			services.AddScoped<IConverterHelper, ConverterHelper>();
+
+			services.AddScoped<IProductRepository, ProductRepository>(); //dependenci injection
+
+           
+			services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
